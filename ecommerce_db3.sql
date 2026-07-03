@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2026 at 07:01 AM
+-- Generation Time: Jul 03, 2026 at 07:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -37,8 +37,8 @@ CREATE TABLE `carritos` (
 --
 
 INSERT INTO `carritos` (`id_carrito`, `usuario_id`) VALUES
-(2, 11),
-(3, 16);
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -121,10 +121,10 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `descripcion`, `nombre`, `precio`,
 (7, 'Queso pecorino romano de excelente calidad.', 'Queso pecorino', 5000, 198),
 (8, '½ docena de huevos de campo número 1 de primera calidad.', 'Huevos de campo', 1500, 148),
 (9, 'Auténtico guanciale de origen italiano.', 'Guanciale', 5000, 1),
-(10, 'Bananas importadas de Ecuador.', 'Banana', 500, 100),
-(11, 'Crema de leche La Serenísima.', 'Crema de leche', 2000, 100),
-(12, '100% miel pura de flores silvestres. Chacra La Julia.', 'Miel', 2750, 250),
-(13, 'Esencia artificial de vainilla, marca Alicante.', 'Esencia de vainilla', 600, 100),
+(10, 'Bananas importadas de Ecuador.', 'Banana', 500, 99),
+(11, 'Crema de leche La Serenísima.', 'Crema de leche', 2000, 99),
+(12, '100% miel pura de flores silvestres. Chacra La Julia.', 'Miel', 2750, 249),
+(13, 'Esencia artificial de vainilla, marca Alicante.', 'Esencia de vainilla', 600, 99),
 (14, 'Avena tradicional integral, marca Quaker.', 'Avena tradicional', 1500, 100),
 (15, 'Aceite de girasol alto oleico. Marca Natura.', 'Aceite de girasol', 950, 97),
 (16, 'Manteca Tonadita, sin sal agregada.', 'Manteca', 2500, 100),
@@ -150,22 +150,6 @@ CREATE TABLE `pedidos` (
   `total` double DEFAULT NULL,
   `id_usuario` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pedidos`
---
-
-INSERT INTO `pedidos` (`id_pedido`, `fecha`, `total`, `id_usuario`) VALUES
-(2, '2026-07-02', 66500, 11),
-(3, '2026-07-03', 25000, 11),
-(4, '2026-07-03', 31500, 11),
-(5, '2026-07-03', 10500, 11),
-(6, '2026-07-03', 1500, 11),
-(7, '2026-07-03', 45000, 11),
-(8, '2026-07-03', 12500, 11),
-(9, '2026-07-03', 37500, 11),
-(10, '2026-07-03', 15000, 11),
-(11, '2026-07-03', 15000, 11);
 
 -- --------------------------------------------------------
 
@@ -315,10 +299,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `apellido`, `contrasenia`, `direccion`, `email`, `nombre`, `telefono`, `rol`) VALUES
-(11, 'Perna', '$2a$10$L0hRcbJtXdezS2G6kjBmK.4LvFEr6thq1LhW2PyP2X0UQBP61m6R6', NULL, 'michelle@mail.com', 'Michelle', NULL, 'ADMIN'),
-(13, 'Fischer', '$2a$10$nlM2fWoSMoS4FSd3aVi3gOh6cGGkqNrx63yXM81r6EJ9YckeccpYS', NULL, 'rociof@mail.com', 'Rocio', NULL, 'USUARIO'),
-(15, 'Lorenzo', '$2a$10$L250usrwtmw87xnkkMEAo.VIxQz3XvQsQs57wc8nPDXOkuSCTuCeC', NULL, 'melani@mail.com', 'Melani', NULL, 'USUARIO'),
-(16, 'Sánchez', '$2a$10$COjlnGs7Ve5VWnZCaEoHEuCHiKx6WAXYnusnW.h/MvpVoGYhEmB6G', NULL, 'santos@mail.com', 'Santos', NULL, 'ADMIN');
+(1, 'Sánchez', '$2a$10$COjlnGs7Ve5VWnZCaEoHEuCHiKx6WAXYnusnW.h/MvpVoGYhEmB6G', NULL, 'santos@mail.com', 'Santos', NULL, 'ADMIN'),
+(2, 'Sánchez', '$2a$10$wppbIVKqAUb6C8k/icZk1eA6mz2KrANUFXq2QnCKqEovHN/HTvf3G', NULL, 'baltazar@mail.com', 'Santos Baltazar', NULL, 'USUARIO');
 
 -- --------------------------------------------------------
 
@@ -330,14 +312,6 @@ CREATE TABLE `usuario_favoritos` (
   `id_usuario` bigint(20) NOT NULL,
   `id_receta` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `usuario_favoritos`
---
-
-INSERT INTO `usuario_favoritos` (`id_usuario`, `id_receta`) VALUES
-(11, 8),
-(11, 16);
 
 --
 -- Indexes for dumped tables
@@ -428,13 +402,13 @@ ALTER TABLE `usuario_favoritos`
 -- AUTO_INCREMENT for table `carritos`
 --
 ALTER TABLE `carritos`
-  MODIFY `id_carrito` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_carrito` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `carrito_detalles`
 --
 ALTER TABLE `carrito_detalles`
-  MODIFY `id_carrito_detalle` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_carrito_detalle` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `categorias`
@@ -458,7 +432,7 @@ ALTER TABLE `ingredientes`
 -- AUTO_INCREMENT for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_pedido` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `recetas`
@@ -476,7 +450,7 @@ ALTER TABLE `receta_detalles`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_usuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
