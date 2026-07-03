@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uade.tpo.e_commerce.dto.DetallePedidoDTO;
+import com.uade.tpo.e_commerce.dto.DetallePedidoRequestDTO;
 import com.uade.tpo.e_commerce.service.DetallePedidoService;
 
 
@@ -41,8 +42,8 @@ public class DetallePedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<DetallePedidoDTO> createDetallePedido(@RequestBody DetallePedidoDTO detallePedidoDTO) {
-        DetallePedidoDTO created = detallePedidoService.saveDetallePedido(detallePedidoDTO);
+    public ResponseEntity<DetallePedidoDTO> createDetallePedido(@RequestBody DetallePedidoRequestDTO requestDTO) {
+        DetallePedidoDTO created = detallePedidoService.saveDetallePedidoConStock(requestDTO);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
@@ -50,8 +51,6 @@ public class DetallePedidoController {
     public ResponseEntity<DetallePedidoDTO> updateDetallePedido(@PathVariable Long id, @RequestBody DetallePedidoDTO detallePedidoDTO) {
         DetallePedidoDTO existing = detallePedidoService.getDetallePedidoById(id);
         if (existing == null) return ResponseEntity.notFound().build();
-        existing.setCantidad(detallePedidoDTO.getCantidad());
-        existing.setPrecioTotal(detallePedidoDTO.getPrecioTotal());
-        return ResponseEntity.ok(detallePedidoService.saveDetallePedido(existing));
+        return ResponseEntity.ok(detallePedidoService.updateDetallePedido(id, detallePedidoDTO));
     }
 }

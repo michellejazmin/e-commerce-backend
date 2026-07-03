@@ -13,6 +13,7 @@ import com.uade.tpo.e_commerce.dto.IngredienteDTO;
 import com.uade.tpo.e_commerce.model.Ingrediente;
 import com.uade.tpo.e_commerce.repository.IngredienteRepository;
 import com.uade.tpo.e_commerce.exception.IngredienteNotFoundException;
+import com.uade.tpo.e_commerce.exception.StockInsuficienteException;
 
 @Service
 @Transactional
@@ -95,6 +96,30 @@ public class IngredienteService {
         }
         ingrediente.setStock(stock);
         Ingrediente actualizado = ingredienteRepository.save(ingrediente);
+        return new IngredienteDTO(
+                actualizado.getIdIngrediente(),
+                actualizado.getNombre(),
+                actualizado.getDescripcion(),
+                actualizado.getStock(),
+                actualizado.getPrecio());
+    }
+
+    public IngredienteDTO disminuirStock(Long id, Integer cantidad) {
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("La cantidad a disminuir debe ser mayor a 0");
+        }
+
+        Ingrediente ingrediente = ingredienteRepository.findById(id)
+                .orElseThrow(() -> new IngredienteNotFoundException(id));
+
+        Integer stockActual = ingrediente.getStock();
+        if (stockActual == null || stockActual < cantidad) {
+            throw new StockInsuficienteException(id, stockActual != null ? stockActual : 0, cantidad);
+        }
+
+        ingrediente.setStock(stockActual - cantidad);
+        Ingrediente actualizado = ingredienteRepository.save(ingrediente);
+
         return new IngredienteDTO(
                 actualizado.getIdIngrediente(),
                 actualizado.getNombre(),

@@ -29,6 +29,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
+    @ExceptionHandler(StockInsuficienteException.class)
+    public ResponseEntity<String> manejarStockInsuficiente(StockInsuficienteException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
     // Maneja EntityNotFoundException (jakarta.persistence) como 404
     // Esto es necesario para que el frontend pueda detectar cuando el carrito
     // no existe y crearlo automáticamente (el CarritoService lanza esta excepción).

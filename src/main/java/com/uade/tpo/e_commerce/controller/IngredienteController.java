@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uade.tpo.e_commerce.dto.IngredienteDTO;
 import com.uade.tpo.e_commerce.dto.IngredienteSaveDTO;
 import com.uade.tpo.e_commerce.dto.IngredienteStockDTO;
+import com.uade.tpo.e_commerce.dto.DisminuirStockDTO;
 import com.uade.tpo.e_commerce.service.IngredienteService;
 
 
@@ -68,6 +69,10 @@ public class IngredienteController {
         if (ingrediente == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(ingredienteService.updateStock(id, stockDTO.getStock()));
     }
-}
 
+    @PutMapping("/{id}/disminuir-stock")
+    public ResponseEntity<IngredienteDTO> disminuirStock(@PathVariable Long id, @RequestBody DisminuirStockDTO dto) {
+        return ResponseEntity.ok(ingredienteService.disminuirStock(id, dto.getCantidad()));
+    }
+}
 
